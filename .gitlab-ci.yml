@@ -1,0 +1,20 @@
+stages:
+  - build
+  - deploy
+
+criar_imagem:
+  stage: build
+  tags:
+    - gcp
+  script:
+    - docker build -t victorbruno221/desafio-gcp-runner:1.0 app/.
+    - docker push victorbruno221/desafio-gcp-runner:1.0
+
+executar_imagem:
+  stage: deploy
+  tags:
+    - gcp
+  needs:
+    - criar_imagem
+  script:
+    - docker run -dti --name webserver-gcp-runner -p 80:80 victorbruno221/desafio-gcp-runner:1.0
