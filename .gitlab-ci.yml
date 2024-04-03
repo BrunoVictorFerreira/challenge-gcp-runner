@@ -5,7 +5,7 @@ stages:
 criar_imagem:
   stage: build
   tags:
-    - gcp
+    - gcp-2
   script:
     - docker build -t victorbruno221/desafio-gcp-runner:1.0 app/.
     - docker push victorbruno221/desafio-gcp-runner:1.0
@@ -13,7 +13,7 @@ criar_imagem:
 executar_imagem:
   stage: deploy
   tags:
-    - gcp
+    - gcp-2
   needs:
     - criar_imagem
   script:
